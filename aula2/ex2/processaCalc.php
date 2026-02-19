@@ -7,10 +7,8 @@
 </head>
 <body>
     <?php
-        $numero1 = $_GET["numero1"];
-        $numero2 = $_GET["numero2"];
-        $total = $numero1 + $numero2;
+        $nota = @$_POST['nota'];
     ?>
-    <h1>Resultado: <?php echo $total; ?></h1>
+    <h1><?php if($nota >= 6){echo "Aprovado: ", $nota;}else{echo "Reprovado: ", $nota;} ?></h1>
 </body>
 </html>

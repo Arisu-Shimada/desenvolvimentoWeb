@@ -6,8 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="processaCalc.php" method="GET">
-        <input type="text" placeholder="Digite um número">
+    <form action="processaCalc.php" method="POST">
+        <input name="num" type="text" placeholder="Digite um número">
+        <input type="submit" value="Enviar">
     </form>
 </body>
 </html>
