@@ -1,7 +1,7 @@
 <?php
 require_once 'db.php';
 
-$controller = new MedicoController();
+$controller = new VendedorController();
 
 $acao = $_GET['acao'] ?? 'index';
 switch ($acao) {
@@ -15,35 +15,37 @@ switch ($acao) {
         $controller->index();
 }
 
-class MedicoController {
+class VendedorController {
 
     public function index() {
         $pdo = getConnection();
-        $stmt = $pdo->query("SELECT * FROM medicos");
+        $stmt = $pdo->query("SELECT * FROM vendedores");
 
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         include '_cabecalho.php';
-        include 'listaMedico.php';
+        include 'listaVendedor.php';
         include '_rodape.php';
     }
 
     public function novo(){
         include '_cabecalho.php';
-        include 'formMedico.php';
+        include 'formVendedor.php';
         include '_rodape.php';
     }
+
 
     public function salvar() {
         $pdo = getConnection();
 
-        $stmt = $pdo->prepare("INSERT INTO medicos (nome, especialidade, crm, salario) 
-                                VALUES (:nome, :especialidade, :crm, :salario)");
+        $stmt = $pdo->prepare("INSERT INTO Vendedores (nome, email, telefone, cpf, comissao) 
+                                VALUES (:nome, :email, :telefone, :cpf, :comissao)");
         $stmt->execute([
             ':nome' => $_POST['nome'],
-            ':especialidade' => $_POST['especialidade'],
-            ':crm' => $_POST['crm'],
-            ':salario' => $_POST['salario']
+            ':email' => $_POST['email'],
+            ':telefone' => $_POST['telefone'],
+            ':cpf' => $_POST['cpf'],
+            ':comissao' => $_POST['comissao']
         ]);
            
         header("Location: ?acao=index");
