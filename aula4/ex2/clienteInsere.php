@@ -29,8 +29,8 @@ if(isset($nomeC)){
     <title>Salvo</title>
 </head>
 <body>
-
-    <h1>Valores cadastrado com sucesso!</h1>
+    
+    <h1>Valores cadastrado com sucesso!</h1X>
 
     <a href="clienteFormulario.php">
         <button>Voltar</button>
