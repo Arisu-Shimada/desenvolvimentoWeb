@@ -1,0 +1,37 @@
+CREATE DATABASE oficina;
+
+USE oficina;
+
+CREATE TABLE veiculos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+modelo VARCHAR(150),
+marca VARCHAR(150),
+ano INT
+);
+
+CREATE TABLE clientes (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(150),
+telefone VARCHAR(20),
+cidade VARCHAR(100)
+);
+
+CREATE TABLE servicos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+descricao VARCHAR(200),
+valor DECIMAL(8,2)
+);
+
+CREATE TABLE funcionarios (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(150),
+cargo VARCHAR(100),
+salario DECIMAL(10,2)
+);
+
+CREATE TABLE fornecedores (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(150),
+produto VARCHAR(150),
+telefone VARCHAR(20)
+);
