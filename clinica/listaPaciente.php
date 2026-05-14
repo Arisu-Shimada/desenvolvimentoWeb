@@ -25,8 +25,8 @@
             <td><?= $dado['email']; ?></td>
             
             <td>
-                <a href="" class="btn btn-primary btn-sm">Editar</a>
-                <a href="" class="btn btn-danger btn-sm">Remover</a>
+                <a href="?acao=editar&id=<?= $dado['id'] ?>" class="btn btn-primary btn-sm">Editar</a>
+                <a href="?acao=remover&id=<?= $dado['id'] ?>" class="btn btn-danger btn-sm">Remover</a>
             </td>
         </tr>
         <?php endforeach; ?>

@@ -1,9 +1,11 @@
 <div class="card mt-5">
     <div class="card-header">
-        <h5>Nova Consulta</h5>
+        <h5><?= isset($dado) ? "Editar Consulta" : "Nova Consulta" ?></h5>
     </div>
     <div class="card-body">
         <form method="post" action="?acao=salvar">
+
+            <input type="hidden" name="id" value="<?= $dado["id"] ?? '' ?>">
 
             <label class="form-label">Data da Consulta:</label>
             <input class="form-control" type="text" name="data_consulta" placeholder="aaaa/mm/dd"

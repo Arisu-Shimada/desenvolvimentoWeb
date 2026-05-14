@@ -1,9 +1,11 @@
 <div class="card mt-5">
     <div class="card-header">
-        <h5>Novo Paciente</h5>
+        <h5><?= isset($dado) ? "Editar Paciente" : "Novo Paciente" ?></h5>
     </div>
     <div class="card-body">
         <form method="post" action="?acao=salvar">
+
+            <input type="hidden" name="id" value="<?= $dado["id"] ?? '' ?>">
 
             <label class="form-label">Nome do Paciente:</label>
             <input class="form-control" type="text" name="nome" 

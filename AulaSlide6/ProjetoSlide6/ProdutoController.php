@@ -45,7 +45,7 @@ class ProdutoController {
         $pdo = getConnection();
         if ($_POST['id']=="") {
             $stmt = $pdo->prepare("INSERT INTO
-                produtos (nome, preco) VALUES (nome, preco)");
+                produtos (nome, preco) VALUES (:nome, :preco)");
             $stmt->execute([
                 ':nome' => $_POST['nome'],
                 ':preco' => $_POST['preco']
