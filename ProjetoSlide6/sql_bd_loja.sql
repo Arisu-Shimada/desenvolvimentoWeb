@@ -1,29 +1,22 @@
-Create DATABASE loja;
+Create DATABASE gamezone;
 
-Use Loja;
+Use gamezone;
 --
--- Estrutura da tabela `produtos`
+-- Estrutura da tabela `jogos`
 --
 
-CREATE TABLE `produtos` (
+CREATE TABLE `jogos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `preco` decimal(10,2) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `descricao` varchar(300) NOT NULL,
+  `nota_media` decimal(10,1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Inserir dados da tabela `produtos`
+-- Inserir dados da tabela `jogos`
 --
 
-INSERT INTO `produtos` (`id`, `nome`, `preco`) VALUES
-(1, 'Mouse', '50.00'),
-(2, 'Teclado', '100.00'),
-(3, 'Monitor', '700.00'),
-(4, 'Notebook', '3500.00'),
-(5, 'Cabo HDMI', '30.00'),
-(6, 'Pen Drive', '40.00'),
-(7, 'HD Externo', '300.00'),
-(8, 'Webcam', '150.00'),
-(9, 'Fone de Ouvido', '80.00'),
-(10, 'Caixa de Som', '120.00');
+INSERT INTO `jogos` (`id`, `nome`, `categoria`,`descricao`,`nota_media`) VALUES
+(1, 'Doki Doki Literature Club', 'Terror psicológico', 'Yandere com historias perturbadoras e tragédias no grupo de amigos, como suicídio', '1000.1')

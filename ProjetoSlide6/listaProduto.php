@@ -1,4 +1,4 @@
-<h5 class="mt-5">Lista de Produtos</h5>
+<h5 class="mt-5">Lista de Jogos</h5>
 
 
 <a href="?acao=novo" class="btn btn-success btn-sm mb-3">Adicionar</a>
