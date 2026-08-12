@@ -1,7 +1,7 @@
 <?php
 require_once 'db.php';
 
-$controller = new ProdutoController();
+$controller = new JogosController();
 
 $acao = $_GET['acao'] ?? 'index';
 switch ($acao) {
@@ -20,22 +20,22 @@ switch ($acao) {
      default:
         $controller->index();
 }
-class ProdutoController {
+class JogosController {
 
     public function index() {
         $pdo = getConnection();
-        $stmt = $pdo->query("SELECT * FROM produtos");
+        $stmt = $pdo->query("SELECT * FROM jogos");
 
         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         include '_cabecalho.php';
-        include 'listaProduto.php';
+        include 'listaJogo.php';
         include '_rodape.php';
     }
 
     public function novo(){
         include '_cabecalho.php';
-        include 'formProduto.php';
+        include 'formJogo.php';
         include '_rodape.php';
     }
 
@@ -44,13 +44,13 @@ public function editar() {
         $id = $_GET['id'];
         $pdo = getConnection();
         $stmt = $pdo->prepare("SELECT * FROM 
-                                produtos 
+                                jogos 
                                 WHERE id = :id");
         $stmt->execute([':id' => $id]);
         $dado = $stmt->fetch(PDO::FETCH_ASSOC);
         
         include '_cabecalho.php';
-        include 'formProduto.php';
+        include 'formJogo.php';
         include '_rodape.php';
     }
 
@@ -58,19 +58,23 @@ public function editar() {
         $pdo = getConnection();
         if ($_POST['id']=="") {
             $stmt = $pdo->prepare("INSERT INTO 
-                                produtos (nome, preco) 
-                                VALUES (:nome, :preco)");
+                                jogos (nome, categoria, descricao, nota_media) 
+                                VALUES (:nome, :categoria, :descricao, :nota_media)");
             $stmt->execute([
                 ':nome' => $_POST['nome'],
-                ':preco' => $_POST['preco']
+                ':categoria' => $_POST['categoria'],
+                ':descricao' => $_POST['descricao'],
+                ':nota_media' => $_POST['nota_media']
             ]); 
         } else { 
-            $stmt = $pdo->prepare("UPDATE produtos SET 
-                                    nome = :nome, preco = :preco 
+            $stmt = $pdo->prepare("UPDATE jogos SET 
+                                    nome = :nome, categoria = :categoria,  descricao = :descricao, nota_media = :nota_media
                                     WHERE id = :id"); 
             $stmt->execute([
                 ':nome' => $_POST['nome'],
-                ':preco' => $_POST['preco'],
+                ':categoria' => $_POST['categoria'],
+                ':descricao' => $_POST['descricao'],
+                ':nota_media' => $_POST['nota_media'],
                 ':id' => $_POST['id']
             ]); 
         }
@@ -82,7 +86,7 @@ public function editar() {
         $id = $_GET['id'];
         $pdo = getConnection();
         $stmt = $pdo->prepare("DELETE FROM 
-                                produtos 
+                                jogos 
                                 WHERE id = :id");
         $stmt->execute([':id' => $id]);
         header("Location: ?acao=index");
