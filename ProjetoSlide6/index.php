@@ -1,3 +1,3 @@
 <?php 
-    header("Location: ProdutoController.php");
+    header("Location: JogosController.php");
 ?>

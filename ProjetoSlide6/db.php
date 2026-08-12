@@ -1,7 +1,7 @@
 <?php
 function getConnection() {
     $host_db = 'localhost';
-    $nome_db = 'loja';//
+    $nome_db = 'gamezone';//
     $usuario_db = 'root';//
     $senha_db = '';
 
