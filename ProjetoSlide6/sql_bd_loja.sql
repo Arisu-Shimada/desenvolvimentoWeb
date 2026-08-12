@@ -7,8 +7,8 @@ Use gamezone;
 
 CREATE TABLE `jogos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `categoria` varchar(50) NOT NULL,
+  `nome` varchar(100) NOT NULL UNIQUE,
+  `categoria` varchar(50) NOT NULL UNIQUE,
   `descricao` varchar(300) NOT NULL,
   `nota_media` decimal(10,1),
   PRIMARY KEY (`id`)
