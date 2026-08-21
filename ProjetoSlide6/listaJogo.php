@@ -9,7 +9,9 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+            <th>Nota Média</th>
             <th class="col-md-2">Ações</th>
         </tr>
     </thead>
@@ -18,7 +20,9 @@
         <tr>
             <td><?= $dado['id']; ?></td>
             <td><?= $dado['nome']; ?></td>
-            <td class="text-end"><?= number_format($dado['preco'], 2, ',', '.'); ?></td>
+            <td><?= $dado['categoria']; ?></td>
+            <td><?= $dado['descricao']; ?></td>
+            <td class="text-end"><?= number_format($dado['nota_media'], 1, ',', '.'); ?></td>
             <td>
                 <a href="?acao=editar&id=<?= $dado['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                 <a href="?acao=excluir&id=<?= $dado['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
