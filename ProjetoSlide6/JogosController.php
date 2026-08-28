@@ -17,6 +17,12 @@ switch ($acao) {
     case 'excluir':
         $controller->excluir();
         break;
+    case 'pesquisar':
+        $controller->pesquisar();
+        break;
+    case 'pesquisarCategorias':
+        $controller->pesquisarCategorias();
+        break;
      default:
         $controller->index();
 }
@@ -93,6 +99,27 @@ public function editar() {
         exit;
     }
 
+    public function pesquisar() {
+        $pdo = getConnection();
+        $busca = $_POST['busca'] ?? '';
+        $categoria = $_POST['categoria'] ?? '';
+        $nota_minima = $_POST['nota_minima'] ?? '';
 
+        $stmt = $pdo->prepare(
+            "SELECT * FROM jogos 
+            WHERE nome LIKE :busca AND
+            categoria like :categoria AND
+            nota_media > :nota_minima;"
+        );
+        $stmt->execute(
+            [':busca' => '%' . $busca . '%',
+             ':categoria' => '%' . $categoria . '%',
+             ':nota_minima' => $nota_minima]
+        );
+        $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        include '_cabecalho.php';
+        include 'listaJogo.php';
+        include '_rodape.php';
+    }
 }

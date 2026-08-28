@@ -104,6 +104,4 @@ class ProdutoController {
         include 'listaProduto.php';
         include '_rodape.php';
     }
-
-
 }

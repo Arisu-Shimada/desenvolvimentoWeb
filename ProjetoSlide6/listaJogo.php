@@ -1,7 +1,23 @@
 <h5 class="mt-5">Lista de Jogos</h5>
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a href="?acao=novo" class="btn btn-success btn-sm">Adicionar</a>
 
-<a href="?acao=novo" class="btn btn-success btn-sm mb-3">Adicionar</a>
+    <form action="?acao=pesquisar" method="POST" class="d-flex gap-2">
+        <input type="text" name="nota_minima" class="form-control form-control-sm" 
+                placeholder="Nota Mínima:" 
+                value="<?= $nota_minima ?? "" ?>">
+
+        <input type="text" name="categoria" class="form-control form-control-sm" 
+                placeholder="Categoria:" 
+                value="<?= $categoria ?? "" ?>">
+
+        <input type="text" name="busca" class="form-control form-control-sm" 
+                placeholder="Nome:" 
+                value="<?= $busca ?? "" ?>">
+        <button type="submit" class="btn btn-secondary btn-sm">Pesquisar</button>
+    </form>
+</div>
 
 <div class="table-responsive">
 <table class="table table-bordered align-middle">
