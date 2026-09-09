@@ -1,16 +1,16 @@
-<h5 class="mt-5">Lista de Pets</h5>
+<h5 class="mt-5">Lista de Jogos</h5>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <a href="?acao=novo" class="btn btn-success btn-sm">Adicionar</a>
 
     <form action="?acao=pesquisar" method="POST" class="d-flex gap-2">
-        <input type="text" name="cliente_id" class="form-control form-control-sm" 
-                placeholder="ID do cliente:" 
-                value="<?= $cliente_id ?? "" ?>">
+        <input type="text" name="nota_minima" class="form-control form-control-sm" 
+                placeholder="Nota Mínima:" 
+                value="<?= $nota_minima ?? "" ?>">
 
-        <input type="text" name="especie" class="form-control form-control-sm" 
-                placeholder="Espécie:" 
-                value="<?= $especie ?? "" ?>">
+        <input type="text" name="categoria" class="form-control form-control-sm" 
+                placeholder="Categoria:" 
+                value="<?= $categoria ?? "" ?>">
 
         <input type="text" name="busca" class="form-control form-control-sm" 
                 placeholder="Nome:" 
@@ -24,13 +24,11 @@
     <thead class="table-light">
         <tr>
             <th>ID</th>
-            <th>ID do Cliente</th>
             <th>Foto</th>
             <th>Nome</th>
-            <th>Espécie</th>
-            <th>Raça</th>
-            <th>Data de Nascimento</th>
-            <th>Peso</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+            <th>Nota Média</th>
             <th class="col-md-2">Ações</th>
         </tr>
     </thead>
@@ -38,19 +36,17 @@
         <?php foreach ($dados as $dado): ?>
         <tr>
             <td><?= $dado['id']; ?></td>
-            <td><?= $dado['cliente_id']; ?></td>
             <td>
-                <?php if (!empty($dado['url_imagem_pet']) && file_exists($dado['url_imagem_pet'])): ?>
-                    <img src="<?= $dado['url_imagem_pet'] ?>?v=<?= filemtime($dado['url_imagem_pet']) ?>" class="img-fluid rounded" style="max-height: 60px;" alt="Imagem do pet">
+                <?php if (!empty($dado['url_imagem_jogo']) && file_exists($dado['url_imagem_jogo'])): ?>
+                    <img src="<?= $dado['url_imagem_jogo'] ?>?v=<?= filemtime($dado['url_imagem_jogo']) ?>" class="img-fluid rounded" style="max-height: 60px;" alt="Imagem do jogo">
                 <?php else: ?>
                     <span class="text-muted">Sem imagem</span>
                 <?php endif; ?>
             </td>
             <td><?= $dado['nome']; ?></td>
-            <td><?= $dado['especie']; ?></td>
-            <td><?= $dado['raca']; ?></td>
-            <td><?= $dado['data_nascimento']; ?></td>
-            <td class="text-end"><?= number_format($dado['peso'], 1, ',', '.'); ?> KG</td>
+            <td><?= $dado['categoria']; ?></td>
+            <td><?= $dado['descricao']; ?></td>
+            <td class="text-end"><?= number_format($dado['nota_media'], 1, ',', '.'); ?></td>
             <td>
                 <a href="?acao=editar&id=<?= $dado['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                 <a href="?acao=excluir&id=<?= $dado['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>

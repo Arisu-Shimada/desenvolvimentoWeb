@@ -27,6 +27,8 @@ switch ($acao) {
         $controller->index();
 }
 class JogosController {
+    private $pasta_imagens = "imagens_pet/"; // pasta para salvar imagens dos produtos
+    private $ext_imagem = ".jpg"; // extensão padrão para todas as imagens
 
     public function index() {
         $pdo = getConnection();
@@ -84,6 +86,10 @@ public function editar() {
                 ':id' => $_POST['id']
             ]); 
         }
+
+        $id = $_POST['id'] == '' ? $pdo->lastInsertId() : $_POST['id'];
+        $this->uploadImagem($id);
+
         header("Location: ?acao=index");
         exit;
     }  
@@ -121,5 +127,44 @@ public function editar() {
         include '_cabecalho.php';
         include 'listaJogo.php';
         include '_rodape.php';
+    }
+
+    private function uploadImagem($id) {
+        if (!is_dir($this->pasta_imagens)) { // se nao existir a pasta, cria
+            mkdir($this->pasta_imagens, 0777, true); // cria pasta
+        }
+
+        if (empty($_FILES['input_imagem']['name'])) { // sem envio de arquivo, apenas sair do método uploadImagem
+            return;
+        }
+
+        $arquivo = $_FILES['input_imagem']; // vetor global $_FILES possui os dados arquivo selecionado para upload
+        $novo_nome = $id . $this->ext_imagem;
+        $caminho_final = $this->pasta_imagens . $novo_nome;
+
+        try { // Move o arquivo enviado da pasta temporária para o caminho e nome definidos
+            $sucesso = move_uploaded_file($arquivo['tmp_name'], $caminho_final);
+            if ($sucesso === false) {
+                throw new Exception("Não foi possível mover o arquivo '{$arquivo['tmp_name']}' para '{$caminho_final}'.");
+            }
+        } catch (Exception $e) {
+            die("Erro no upload da imagem: " . $e->getMessage());
+        }
+
+        $pdo = getConnection();
+        $stmt = $pdo->prepare("UPDATE jogos SET url_imagem_jogo = :url_imagem_jogo WHERE id = :id");
+        $stmt->execute([
+            ':url_imagem_jogo' => $caminho_final,
+            ':id' => $id
+        ]);
+    }
+
+    private function excluirImagem($id) {
+        // Remove imagem
+        $caminho_imagem = $this->pasta_imagens . $id . $this->ext_imagem;
+        if (file_exists($caminho_imagem)) {
+            unlink($caminho_imagem);
+        }
+
     }
 }
