@@ -1,4 +1,5 @@
 <?php
+require_once 'AutController.php';
 require_once 'db.php';
 
 $controller = new JogosController();
@@ -27,6 +28,11 @@ switch ($acao) {
         $controller->index();
 }
 class JogosController {
+    
+    public function __construct() {
+        AutController::verificarAutenticacao();
+    }
+
     private $pasta_imagens = "imagens_pet/"; // pasta para salvar imagens dos produtos
     private $ext_imagem = ".jpg"; // extensão padrão para todas as imagens
 

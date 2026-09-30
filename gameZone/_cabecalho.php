@@ -17,6 +17,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <?php if (AutController::getUsuarioLogado()!=null) : ?>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -35,9 +38,10 @@
                     </ul>
 
 
-                        Usuário: usuário <a href="">(Sair)</a>
+                        Usuário: <?= AutController::getUsuarioLogado() ?? '' ?> <a href="AutController.php?acao=logout">(Sair)</a>
 
 
                 </div>
+                <?php endif; ?>
             </div>
         </nav>
